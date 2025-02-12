@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Pengajuan Kredit Kendaraan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f6f7ff 0%, #e9ecff 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .form-section {
+            padding: 50px 0;
+            min-height: calc(100vh - 136px);
+        }
+        
+        .form-container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 10px;
+        }
+
+        .form-control {
+            padding: 12px 15px;
+            margin-bottom: 25px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            box-shadow: 0 0 0 3px rgba(37,99,235,0.2);
+            border-color: var(--primary-color);
+        }
+
+        .input-group-text {
+            background-color: #f3f4f6;
+            border: 2px solid #e5e7eb;
+            border-right: none;
+            border-radius: 12px 0 0 12px;
+        }
+
+        .input-group .form-control {
+            border-left: none;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .form-select {
+            padding: 12px 15px;
+            margin-bottom: 25px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+        }
+
+        .btn-submit {
+            padding: 15px 30px;
+            font-weight: 600;
+            border-radius: 12px;
+            width: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37,99,235,0.4);
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 25px;
+            color: #6b7280;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--primary-color);
+        }
+
+        .form-floating {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .progress-step {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #6b7280;
+            position: relative;
+            z-index: 1;
+        }
+
+        .progress-step.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .progress-line {
+            position: absolute;
+            top: 17px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #e5e7eb;
+            z-index: 0;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #1f2937;
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .form-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+        }
+
+        .icon-input {
+            padding-left: 45px;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.5s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-car-side me-2"></i>KreditKendaraan
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"><i class="fas fa-home me-1"></i>Beranda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/submit"><i class="fas fa-file-alt me-1"></i>Ajukan Kredit</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard"><i class="fas fa-tachometer-alt me-1"></i>Dashboard</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Form Section -->
+    <section class="form-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-7">
+                    <div class="form-container animate-fadeInUp">
+                        <h2 class="section-title">Form Pengajuan Kredit Kendaraan</h2>
+                        
+                        <div class="progress-steps">
+                            <div class="progress-line"></div>
+                            <div class="progress-step active">1</div>
+                            <div class="progress-step">2</div>
+                            <div class="progress-step">3</div>
+                        </div>
+
+                        <form action="/submit" method="POST">
+                            <div class="form-group">
+                                <label for="name" class="form-label">Nama Lengkap</label>
+                                <div class="input-with-icon">
+                                    <i class="fas fa-user form-icon"></i>
+                                    <input type="text" class="form-control icon-input" id="name" name="name" required 
+                                           placeholder="Masukkan nama lengkap Anda">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="nik" class="form-label">NIK</label>
+                                <div class="input-with-icon">
+                                    <i class="fas fa-id-card form-icon"></i>
+                                    <input type="text" class="form-control icon-input" id="nik" name="nik" required 
+                                           placeholder="Masukkan nomor NIK" pattern="[0-9]{16}">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="phone" class="form-label">Nomor Telepon</label>
+                                        <div class="input-with-icon">
+                                            <i class="fas fa-phone form-icon"></i>
+                                            <input type="tel" class="form-control icon-input" id="phone" name="phone" required 
+                                                   placeholder="Contoh: 08123456789">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="email" class="form-label">Email</label>
+                                        <div class="input-with-icon">
+                                            <i class="fas fa-envelope form-icon"></i>
+                                            <input type="email" class="form-control icon-input" id="email" name="email" required 
+                                                   placeholder="Masukkan email Anda">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="vehicle" class="form-label">Kendaraan yang Dipilih</label>
+                                <select class="form-select" id="vehicle" name="vehicle" required>
+                                    <option value="">Pilih Kendaraan</option>
+                                    <option value="Toyota Avanza">Toyota Avanza</option>
+                                    <option value="Honda Brio">Honda Brio</option>
+                                    <option value="Mitsubishi Xpander">Mitsubishi Xpander</option>
+                                    <option value="Daihatsu Terios">Daihatsu Terios</option>
+                                </select>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="amount" class="form-label">Jumlah Kredit</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">Rp</span>
+                                            <input type="number" class="form-control" id="amount" name="amount" required 
+                                                   placeholder="Masukkan jumlah kredit">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="tenor" class="form-label">Tenor</label>
+                                        <select class="form-select" id="tenor" name="tenor" required>
+                                            <option value="">Pilih Tenor</option>
+                                            <option value="12">12 Bulan</option>
+                                            <option value="24">24 Bulan</option>
+                                            <option value="36">36 Bulan</option>
+                                            <option value="48">48 Bulan</option>
+                                            <option value="60">60 Bulan</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-submit">
+                                <i class="fas fa-paper-plane me-2"></i>Kirim Pengajuan
+                            </button>
+                        </form>
+                        <div class="text-center">
+                            <a href="/" class="back-link">
+                                <i class="fas fa-arrow-left me-2"></i>Kembali ke Home
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4">
+        <div class="container text-center">
+            <p class="mb-0">© 2024 KreditKendaraan. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Animasi untuk form input saat focus
+            $('.form-control, .form-select').focus(function() {
+                $(this).parent().addClass('focused');
+            }).blur(function() {
+                $(this).parent().removeClass('focused');
+            });
+
+            // Format number input dengan separator ribuan
+            $('#amount').on('input', function() {
+                let value = $(this).val().replace(/,/g, '');
+                value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                $(this).val(value);
+            });
+        });
+    </script>
+</body>
+</html>
